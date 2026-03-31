@@ -10,7 +10,7 @@ var chudeRouter = require('./routers/chude');
 var taikhoanRouter = require('./routers/taikhoan');
 var baivietRouter = require('./routers/baiviet');
 
-
+// Kết nối đến MongoDB
 var uri = 'mongodb://admin:admin123@ac-exoafeo-shard-00-02.dmubves.mongodb.net:27017/trangtin?ssl=true&authSource=admin';
 mongoose.connect(uri).catch(err => console.log(err));
 
