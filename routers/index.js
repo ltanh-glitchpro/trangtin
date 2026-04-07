@@ -39,7 +39,7 @@ router.get('/baiviet/chude/:id', async (req, res) => {
 	var id = req.params.id;
 
 	// lấy chuyên mục hiển thị vào menu
-	var cm = await ChuDe.find()
+	var cm = await ChuDe.find().exec();
 
 	// lấy thông tin chủ đề hiện tại
 	var cd = await ChuDe.findById(id);
@@ -73,7 +73,7 @@ router.get('/baiviet/chitiet/:id', async (req, res) => {
 	var id = req.params.id;
 
 	// Lấy chuyên mục hiển thị vào menu
-	var cm = await ChuDe.find();
+	var cm = await ChuDe.find().exec();
 
 	// Lấy thông tin bài viết hiện tại
 	var bv = await BaiViet.findById(id)
@@ -112,14 +112,17 @@ router.get('/baiviet/chitiet/:id', async (req, res) => {
 
 // GET: Tin mới nhất
 router.get('/tinmoi', async (req, res) => {
+	var cm = await ChuDe.find().exec();
 	res.render('tinmoinhat', {
-		title: 'Tin mới nhất'
+		title: 'Tin mới nhất',
+		chuyenmuc: cm
 	});
 });
 
 // POST: Kết quả tìm kiếm
 router.post('/timkiem', async (req, res) => {
 	var tukhoa = req.body.tukhoa;
+	var cm = await ChuDe.find().exec();
 	
 	// Xử lý tìm kiếm bài viết
 	var bv = [];
@@ -127,7 +130,8 @@ router.post('/timkiem', async (req, res) => {
 	res.render('timkiem', {
 		title: 'Kết quả tìm kiếm',
 		baiviet: bv,
-		tukhoa: tukhoa
+		tukhoa: tukhoa,
+		chuyenmuc: cm
 	});
 });
 
