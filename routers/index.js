@@ -39,7 +39,7 @@ router.get('/baiviet/chude/:id', async (req, res) => {
 	var id = req.params.id;
 
 	// lấy chuyên mục hiển thị vào menu
-	var cm = await ChuDe.find().exec();
+	var cm = await ChuDe.find().sort({ TenChuDe: 1 }).exec();
 
 	// lấy thông tin chủ đề hiện tại
 	var cd = await ChuDe.findById(id);
@@ -73,7 +73,7 @@ router.get('/baiviet/chitiet/:id', async (req, res) => {
 	var id = req.params.id;
 
 	// Lấy chuyên mục hiển thị vào menu
-	var cm = await ChuDe.find().exec();
+	var cm = await ChuDe.find().sort({ TenChuDe: 1 }).exec();
 
 	// Lấy thông tin bài viết hiện tại
 	var bv = await BaiViet.findById(id)
@@ -112,7 +112,7 @@ router.get('/baiviet/chitiet/:id', async (req, res) => {
 
 // GET: Tin mới nhất
 router.get('/tinmoi', async (req, res) => {
-	var cm = await ChuDe.find().exec();
+	var cm = await ChuDe.find().sort({ TenChuDe: 1 }).exec();
 	res.render('tinmoinhat', {
 		title: 'Tin mới nhất',
 		chuyenmuc: cm
@@ -122,7 +122,7 @@ router.get('/tinmoi', async (req, res) => {
 // POST: Kết quả tìm kiếm
 router.post('/timkiem', async (req, res) => {
 	var tukhoa = req.body.tukhoa;
-	var cm = await ChuDe.find().exec();
+	var cm = await ChuDe.find().sort({ TenChuDe: 1 }).exec();
 	
 	// Xử lý tìm kiếm bài viết
 	var bv = [];
